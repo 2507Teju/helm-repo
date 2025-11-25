@@ -1,7 +1,10 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  annotations:
+    argocd.argoproj.io/tracking-id: first-application-myapp:apps/Deployment:default/my-app
   name: my-app
+  namespace: default
 spec:
   replicas: 3
   selector:
@@ -13,7 +16,7 @@ spec:
         app: myapp
     spec:
       containers:
-        - name: my-app
-          image: kammana/pyappeks:v1
+        - image: kammana/pyappeks:v1
+          name: my-app
           ports:
             - containerPort: 8080
