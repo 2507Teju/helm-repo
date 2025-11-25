@@ -1,10 +1,19 @@
 apiVersion: v1
-kind: Pod
+kind: Deployment
 metadata:
   name: my-app
 spec:
-  containers:
-    - name: my-app
-      image: kammana/pyappeks:v1
-      ports:
-        - containerPort: 8080
+  replicas: 3
+  selector:
+    matchLables:
+      app: myapp
+  template:
+    metadata:
+      labels:
+        app: myapp
+    spec:
+      containers:
+        - name: my-app
+          image: kammana/pyappeks:v1
+          ports:
+            - containerPort: 8080
